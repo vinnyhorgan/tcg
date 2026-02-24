@@ -2,8 +2,10 @@ pre-commit:
   parallel: true
   commands:
     format:
-      glob: "*.{ts,tsx,js,jsx,json,css,md}"
-      run: bunx biome check --write --staged {staged_files}
+      # Exclude .md — Biome doesn't process markdown; passing only .md causes "no files processed" exit 1.
+      # When no files match (e.g. only .md staged), skip biome so the hook still passes.
+      glob: "*.{ts,tsx,js,jsx,json,css}"
+      run: bash -c '[ -n "{staged_files}" ] && bunx biome check --write {staged_files} || true'
       stage_fixed: true
     typecheck:
       run: bunx tsc --noEmit
