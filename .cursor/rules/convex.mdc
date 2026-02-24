@@ -1,0 +1,51 @@
+---
+description: Rules for Convex backend development
+globs: convex/**
+alwaysApply: false
+---
+
+# Convex Backend Rules
+
+## MCP Tools
+
+Always use the **Convex plugin MCP** for:
+- Checking table schemas and data
+- Running one-off queries
+- Viewing logs and function specs
+- Checking deployment status
+
+Use **Context7** to look up Convex documentation when uncertain about APIs.
+
+## Function Patterns
+
+- All public query/mutation/action functions MUST validate arguments using `v` validators from `convex/values`.
+- Keep handler functions thin -- extract business logic into plain TypeScript helper functions.
+- Never use `Date.now()` in queries (breaks caching and reactivity). Pass timestamps as arguments or use `ctx.scheduler` in mutations.
+- Use indexes (defined in `schema.ts`) instead of `.filter()` for database queries.
+- Only schedule `internal` functions, never `api` functions.
+
+## Schema Design
+
+- Design flat, relational schemas with proper indexes.
+- Avoid deep nesting in documents.
+- Define all indexes in `convex/schema.ts`.
+- Use the **Sequential Thinking MCP** when planning schema changes.
+
+## File Organization
+
+- Group related functions by domain (e.g., `convex/cards.ts`, `convex/decks.ts`, `convex/matches.ts`).
+- Internal helper functions go in files prefixed with underscore or use `internalQuery`/`internalMutation`/`internalAction`.
+- Never import from or modify files in `convex/_generated/` -- these are auto-generated.
+
+## Testing
+
+- All Convex functions must have tests in `convex/__tests__/`.
+- Use `convex-test` for testing Convex functions.
+- Test both happy paths and error cases.
+- Test argument validation rejects invalid inputs.
+
+## Error Handling
+
+- Throw errors for exceptional/unexpected cases with clear messages.
+- Return `null` for expected "not found" cases.
+- Never swallow errors silently.

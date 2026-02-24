@@ -1,0 +1,54 @@
+---
+description: Global rules for all agent interactions in this project
+globs: *
+alwaysApply: true
+---
+
+# General Project Rules
+
+This is an indie online trading card game (browser-based). The project uses:
+- **Runtime/Package Manager**: Bun (NEVER use npm, yarn, or pnpm)
+- **Framework**: Next.js 16 (App Router, React Compiler enabled)
+- **Backend**: Convex (real-time, serverless)
+- **Styling**: Tailwind CSS v4 + shadcn/ui (new-york style)
+- **Formatting/Linting**: Biome 2.2 (opinionated, auto-format everything)
+- **Animation**: Motion library
+- **Language**: TypeScript in strict mode
+
+## Package Manager
+
+Use `bun` for ALL operations: `bun add`, `bun remove`, `bun run`, `bun test`, `bunx`. Never use npm, npx, yarn, or pnpm. The only exception is `npx convex` for Convex CLI commands.
+
+## Code Quality
+
+- No `any` types. Ever. Use `unknown` and narrow with type guards.
+- No `as` type assertions unless there is a documented justification in a comment.
+- All public functions and exports must have explicit types.
+- Run `biome check --write` after making changes to ensure formatting.
+- Use `cn()` from `@/lib/utils` for Tailwind class merging.
+
+## Testing
+
+Every implementation must be accompanied by unit tests using `bun test`. Use `describe`/`it`/`expect` from `bun:test`. Tests live in `__tests__/` directories adjacent to the code they test.
+
+## Tools and MCPs -- Use These Autonomously
+
+These tools MUST be used proactively without the user having to ask:
+
+- **Memory MCP**: Read the memory graph at the start of complex tasks. Store architectural decisions, naming conventions, user preferences, and project context. Update as the project evolves.
+- **Context7 Plugin**: Look up library documentation whenever uncertain about APIs, patterns, or best practices for any dependency (Next.js, Convex, React, Tailwind, Motion, etc.).
+- **Sequential Thinking MCP**: Use for complex multi-step tasks, architectural decisions, or when breaking down large features.
+- **Convex Plugin**: Use for all Convex-related work (schema, functions, logs, deployment status).
+- **Vercel Plugin**: Follow best practices for Next.js and deployment.
+- **shadcn MCP**: Use to discover, search, and add UI components.
+- **Next.js DevTools MCP**: Use for Next.js debugging and development.
+
+## Commit Style
+
+Use conventional commits: `feat:`, `fix:`, `refactor:`, `test:`, `chore:`, `docs:`.
+
+## Repository Cleanliness
+
+- Keep imports organized (Biome handles this automatically).
+- No dead code, no commented-out code in commits.
+- Files must end with a newline, use LF line endings, UTF-8 encoding, 2-space indentation.

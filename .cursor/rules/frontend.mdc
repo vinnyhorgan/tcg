@@ -1,0 +1,45 @@
+---
+description: Rules for frontend development (pages, components, hooks)
+globs: "{app/**,components/**,hooks/**}"
+alwaysApply: false
+---
+
+# Frontend Rules
+
+## Design Skill
+
+ALWAYS read and follow the frontend-design skill at `.cursor/skills/frontend-design/SKILL.md` before writing any frontend code. The project aims for a super polished, cute, welcoming aesthetic -- inspired by Balatro's vibe. Every UI element should feel intentional and delightful.
+
+## MCP Tools
+
+- **shadcn MCP**: Search and add components from the shadcn registry. Check what's available before building custom components.
+- **Next.js DevTools MCP**: Use for debugging, performance insights, and route inspection.
+- **Vercel Plugin**: Follow React/Next.js best practices from Vercel engineering.
+- **Context7**: Look up Next.js, React, Tailwind, and Motion docs when needed.
+
+## Component Patterns
+
+- Use React Server Components by default. Add `"use client"` only when the component needs interactivity, hooks, or browser APIs.
+- Use `cn()` from `@/lib/utils` for all Tailwind class merging.
+- Prefer shadcn/ui components from `@/components/ui/` over custom implementations.
+- Use the Motion library (already installed as `motion`) for animations.
+- Components go in `components/` (shared) or co-located in `app/` route directories (page-specific).
+- Hooks go in `hooks/`.
+
+## Styling
+
+- Use Tailwind CSS v4 utility classes.
+- Use CSS variables defined in `app/globals.css` for theming (shadcn tokens).
+- Dark mode is supported via the `.dark` class.
+
+## Testing
+
+- React components must be tested using `@testing-library/react` with `happy-dom`.
+- Test user interactions and rendered output, not implementation details.
+- Tests live in `__tests__/` directories adjacent to the components.
+
+## Data Fetching
+
+- Use Convex hooks (`useQuery`, `useMutation`, `useAction`) from `convex/react` for all data.
+- The `ConvexClientProvider` wraps the app in `app/layout.tsx`.
+- Prefer reactive queries (`useQuery`) over one-shot fetches for real-time data.

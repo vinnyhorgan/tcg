@@ -1,0 +1,43 @@
+---
+description: Rules for using the Memory MCP to persist project knowledge
+globs: *
+alwaysApply: true
+---
+
+# Memory Management
+
+The Memory MCP (`@modelcontextprotocol/server-memory`) persists a knowledge graph across sessions. USE IT PROACTIVELY.
+
+## When to Read Memory
+
+- At the start of any complex task or new conversation
+- When context about past decisions, preferences, or architecture is needed
+- Before making architectural or naming decisions (check if a convention was established)
+
+## When to Write Memory
+
+Store as entities with observations:
+
+- **Architectural decisions**: Tech choices, patterns adopted, schema designs
+- **Naming conventions**: How things are named in this project
+- **User preferences**: Coding style preferences, aesthetic choices, workflow preferences
+- **Feature status**: What's been built, what's in progress, what's planned
+- **Domain concepts**: Game rules, card types, mechanics as they're defined
+- **Gotchas and lessons**: Things that went wrong and how they were fixed
+
+## Entity Types
+
+Use consistent entity types:
+- `Decision` -- for architectural/design decisions
+- `Convention` -- for naming and coding conventions
+- `Preference` -- for user preferences
+- `Feature` -- for feature tracking
+- `Concept` -- for game domain concepts
+- `Bug` -- for known issues and fixes
+
+## Hygiene
+
+- Keep observations concise and factual.
+- Update existing entities instead of creating duplicates.
+- Delete outdated observations when things change.
+- Use relations to connect related entities (e.g., a Feature `uses` a Convention).

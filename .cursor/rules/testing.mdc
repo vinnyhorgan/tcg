@@ -1,0 +1,58 @@
+---
+description: Rules for writing and running tests
+globs: "**/*.test.{ts,tsx}"
+alwaysApply: false
+---
+
+# Testing Rules
+
+## Runner
+
+Use `bun test` exclusively. All test utilities come from `bun:test`:
+
+```ts
+import { describe, expect, it, beforeEach, afterEach, mock } from "bun:test";
+```
+
+## Structure
+
+- Tests live in `__tests__/` directories adjacent to the code they test.
+- Name test files `<module>.test.ts` or `<component>.test.tsx`.
+- Use `describe` blocks to group related tests. Use `it` for individual cases.
+
+## Frontend Component Tests
+
+Use `@testing-library/react` with `happy-dom` for DOM testing:
+
+```ts
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+```
+
+Set the happy-dom environment at the top of component test files:
+
+```ts
+// @bun
+/// <reference lib="dom" />
+import { GlobalRegistrator } from "@happy-dom/global-registrator";
+
+GlobalRegistrator.register();
+```
+
+## Convex Function Tests
+
+Use `convex-test` for backend function testing. See Convex testing docs via Context7 for patterns.
+
+## Principles
+
+- Test behavior, not implementation. Assert what the user sees or what the function returns.
+- Test both happy paths and edge cases.
+- Keep tests fast and isolated -- no shared mutable state between tests.
+- Use `beforeEach` for setup, `afterEach` for cleanup.
+- Mock external dependencies, not internal logic.
+
+## Scripts
+
+- `bun test` -- run all tests once
+- `bun test --watch` -- watch mode during development
+- `bun test --coverage` -- run with coverage report
