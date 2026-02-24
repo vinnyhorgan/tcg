@@ -17,6 +17,13 @@
       "env": {
         "MEMORY_FILE_PATH": "/home/dvh/.cursor/memory.jsonl"
       }
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
     }
   }
 }
