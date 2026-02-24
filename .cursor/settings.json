@@ -5,6 +5,9 @@
     },
     "context7-plugin": {
       "enabled": true
+    },
+    "convex": {
+      "enabled": true
     }
   }
 }
